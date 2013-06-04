@@ -1,0 +1,22 @@
+<?PHP
+
+$DATABASE_CONFIG = array(
+	'devel' => array(
+		'driver'   => 'mysql',
+		'host'     => 'localhost',
+		'login'    => 'login',
+		'password' => 'password',
+		'database' => 'database'
+	),
+
+	'test' => array(
+		'driver'   => 'mysql',
+		'host'     => 'localhost',
+		'login'    => 'login',
+		'password' => 'password',
+		'database' => 'database'
+	),
+
+);
+
+?>
