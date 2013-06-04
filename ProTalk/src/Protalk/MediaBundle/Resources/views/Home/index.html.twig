@@ -1,0 +1,128 @@
+{% extends "::base.html.twig" %}
+
+{% block javascriptsHead %}
+    {{ parent() }}
+
+    <script>
+    var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+    }
+    </script>
+
+    <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
+{% block title "Home" %}
+
+{% block body %}
+<h1>LATEST TALKS</h1>
+{% for media in latestMedia %}
+<article class="mediaLarge">
+    <div class="mediaThumbNailLarge">
+        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+    </div>
+    <div class="mediaTextLarge">
+        <header>
+            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(34) }}</a></h2>
+            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.getOneSpeaker()|truncate(20) }}</a></span></p>
+        </header>
+        <p>{{ media.description|truncate(75) }}</p>
+        <footer>
+            <p>
+                <span class="metadata duration">{{ media.length }}</span> |
+
+                <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image" />
+
+                <span class="metadata">
+                    {% if media.visits == 1 %}
+                        {{ media.visits }} view
+                    {% else  %}
+                        {{ media.visits }} views
+                    {% endif %}
+                </span> |
+
+                <span class="metadata">Rating: {% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+           </p>
+        </footer>
+    </div>
+</article>
+{% endfor %}
+<div>
+    <a class="button" href="{{ path('search_results', { 'sort': 'date' }) }}"><span>MORE RECENT ITEMS</span></a>
+</div>
+{% endblock %}
+
+{% block rightcolumn %}
+<section>
+    <div id="tabControl" class="hidden tabControl">
+        <ul>
+            <li><a href="#viewed">TOP VISITED</a></li>
+            <li><a href="#rated">TOP RATED</a></li>
+        </ul>
+        <div>
+            <div id="viewed">
+                {% for media in topViewedMedia %}
+                <article class="tabMedia">
+                    <div class="tabMediaThumbNail">
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+                    </div>
+                    <div class="tabMediaText">
+                        <header>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(23) }}</a></h2>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getOneSpeaker()|truncate(25) : media.getOneSpeaker()|truncate(16) }}</a></span></p>
+                        </header>
+
+                        <footer>
+                            <p>
+                               <span class="metadata duration">{{ media.length }}</span> |
+                               <img src="{{ asset('images/binoculars.png') }}" alt="Binoculars Image"/>
+                               <span class="metadata">
+                                   {% if media.visits == 1 %}
+                                       {{ media.visits }} view
+                                   {% else %}
+                                       {{ media.visits }} views
+                                   {% endif %}
+                               </span>
+                            </p>
+                        </footer>
+                    </div>
+                </article>
+                {% endfor %}
+                <div>
+                    <a class="button" href="{{ path('search_results', { 'sort': 'visits' } ) }}"><span>TOP VISITED ITEMS</span></a>
+                </div>
+            </div>
+
+            <div id="rated">
+                {% for media in topRatedMedia %}
+                <article class="tabMedia">
+                    <div class="tabMediaThumbNail">
+                        <a href="{{ path('media_show', { 'slug': media.slug }) }}"><img src="{{ media.displayThumbnail() }}" alt="Media ThumbNail Image"/></a>
+                    </div>
+                    <div class="tabMediaText">
+                        <header>
+                            <h2 title="{{media.title}}"><a href="{{ path('media_show', { 'slug': media.slug }) }}">{{ media.title|truncate(23) }}</a></h2>
+                            <p><time datetime="{{ media.date is empty ? "" : media.date|date("Y/m/d") }}" >{{ media.date is empty ? "" : media.date|date("d M Y") }} by </time><span class="name"><a class="speaker" href="{{ url('get_speakers', { 'id': media.id }) }}">{{ media.date is empty ? media.getOneSpeaker()|truncate(25) : media.getOneSpeaker()|truncate(16) }}</a></span></p>
+                        </header>
+
+                        <footer>
+                            <span class="metadata duration">{{ media.length }}</span> |
+                            <span class="metadata">{% render "ProtalkMediaBundle:Rating:index" with {'rating' : media.rating } %}</span>
+                        </footer>
+                    </div>
+                </article>
+                {% endfor %}
+                <div>
+                    <a class="button" href="{{ path('search_results', { 'sort': 'rating' }) }}"><span>TOP RATED ITEMS</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="hidden">
+    {% render "ProtalkMediaBundle:Sponsor:index" %}
+</div>
+
+{% endblock %}

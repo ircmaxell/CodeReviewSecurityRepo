@@ -1,0 +1,15 @@
+{% if comments|length > 0 %}
+    <h1>COMMENTS</h1>
+{% endif %}
+{% for comment in comments %}
+    <article class="comment">
+        <p><time datetime="{{ comment.datetime|date("Y/m/d")}}" >{{ comment.datetime|date("d M Y") }} by </time>
+            {% if comment.website is empty %}
+                <span class="name">{{comment.author}}</span>
+            {% else %}
+                <a href="{{comment.website}}"><span class="name">{{comment.author}}</span></a>
+            {% endif %}
+        </p>
+        <p class="commentText">{{ comment.content }}</p>
+    </article>
+{% endfor %}

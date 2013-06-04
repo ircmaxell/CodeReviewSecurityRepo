@@ -1,0 +1,83 @@
+{% extends "::base.html.twig" %}
+
+{% block title "Contribution" %}
+
+{% block javascriptsHead %}
+{{ parent() }}
+
+<script>
+      var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+      }
+</script>
+<script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<h1>Contribution</h1>
+{% render "ProtalkPageBundle:Page:content" with { 'url' : 'contribute' } %}
+
+{% if app.session.hasFlash('contribution-notice') %}
+<div class="contribution-notice">
+    {{ app.session.flash('contribution-notice') }}
+</div>
+{% endif %}
+<form action="{{ path('contribute_new') }}" method="post" {{ form_enctype(form) }} id="contribution">
+
+    {{ form_errors(form) }}
+
+    <div>
+        {{ form_errors(form.name, { 'attr': {'class': 'form_error'} }) }}
+        {{ form_label(form.name, 'Your name*', { 'label_attr': {'class': 'form_label'} }) }}
+        {{ form_widget(form.name, { 'attr': {'class': 'form_field'} }) }}
+    </div>
+
+    <div>
+        {{ form_errors(form.email, { 'attr': {'class': 'form_error'} }) }}
+        {{ form_label(form.email, 'Your email address*', { 'label_attr': {'class': 'form_label'} }) }}
+        {{ form_widget(form.email, { 'attr': {'class': 'form_field'} }) }}
+    </div>
+
+
+    <div>
+        {{ form_errors(form.hostUrl, { 'attr': {'class': 'form_error'} }) }}
+        {{ form_label(form.hostUrl, 'Where is it? (link)*', { 'label_attr': {'class': 'form_label'} }) }}
+        {{ form_widget(form.hostUrl, { 'attr': {'class': 'form_field'} }) }}
+    </div>
+
+    <div>
+        {{ form_errors(form.title, { 'attr': {'class': 'form_error'} }) }}
+        {{ form_label(form.title, 'What\'s the title?*', { 'label_attr': {'class': 'form_label'} }) }}
+        {{ form_widget(form.title, { 'attr': {'class': 'form_field'} }) }}
+    </div>
+
+    <div>
+        {{ form_errors(form.tags) }}
+        {{ form_label(form.tags, 'Enter up to 5 tags', { 'label_attr': {'class': 'form_label'} }) }}
+        {{ form_widget(form.tags, { 'attr': {'class': 'form_field'} }) }}
+    </div>
+
+    {% form_theme form 'EWZRecaptchaBundle:Form:ewz_recaptcha_widget.html.twig' %}
+    {{ form_errors(form.recaptcha) }}
+    {{ form_widget(form.recaptcha, { 'attr': {
+        'options' : {
+            'theme' : 'clean',
+        },
+    } }) }}
+
+
+    {{ form_rest(form) }}
+
+    <div>
+         <a id="contribute_submit_button" class="button" href="#" onclick="document.getElementById('contribution').submit();" ><span>SUBMIT</span></a>
+    </div>
+</form>
+{% endblock %}
+
+{% block rightcolumn %}
+    {% include '::sidebar.html.twig' %}
+{% endblock %}

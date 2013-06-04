@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block javascriptsHead %}
+    <script src="{{ asset('js/explore.js') }}"></script>
+    <script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
+{% block title "Explore" %}
+
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<section id="exploreSection">
+    <div id="tabControl" class="hidden tabControlExplore">
+        <ul>
+            <li><a href="#categories-link">CATEGORIES</a></li>
+            <li><a href="#tags-link">TAGS</a></li>
+            <li><a href="#speakers-link">SPEAKERS</a></li>
+        </ul>
+        <div>
+            <div id="categories">
+                {% render "ProtalkMediaBundle:Category:list" %}
+            </div>
+
+            <div id="tags">
+                {% render "ProtalkMediaBundle:Tag:list" %}
+            </div>
+
+            <div id="speakers">
+                {% render "ProtalkMediaBundle:Speaker:list" %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block rightcolumn %}
+{% endblock %}

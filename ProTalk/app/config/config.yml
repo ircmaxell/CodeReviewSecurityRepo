@@ -1,0 +1,204 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    default_locale:  %locale%
+    translator:      { fallback: en }
+    secret:          %secret%
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:         ~
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        # closure:
+        #     jar: %kernel.root_dir%/java/compiler.jar
+        # yui_css:
+        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+
+jms_security_extra:
+    secure_all_services: false
+
+# SonataAdminBundle
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+sonata_admin:
+    title:      ProTalk
+    dashboard:
+        blocks:
+            # display a dashboard block
+            - { position: left, type: sonata.admin.block.admin_list }
+
+        groups:
+            protalk_common:
+                label: Common
+                items: ~
+            protalk_feed:
+                label: Feed
+                items: ~    
+            protalk_media:
+                label: Media
+                items: ~ 
+            protalk_user:
+                label: User
+                items: ~
+    security:
+        handler: sonata.admin.security.handler.role
+        information:
+            EDIT: EDIT
+            LIST: LIST
+            CREATE: CREATE
+            VIEW: VIEW
+            DELETE: DELETE
+            EXPORT: EXPORT
+            OPERATOR: OPERATOR
+            MASTER: MASTER
+
+services:
+   protalk.common.admin.language:
+      class: Protalk\AdminBundle\Admin\LanguageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Language }
+      arguments: [null, Protalk\MediaBundle\Entity\Language, null] 
+   protalk.common.admin.languagecategory:
+      class: Protalk\AdminBundle\Admin\LanguageCategoryAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\LanguageCategory, null] 
+   protalk.common.admin.medialanguagecategory:
+      class: Protalk\AdminBundle\Admin\MediaLanguageCategoryAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaLanguageCategory, null] 
+   protalk.common.admin.mediaspeaker:
+      class: Protalk\AdminBundle\Admin\MediaSpeakerAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaSpeaker, null] 
+   protalk.common.admin.mediatag:
+      class: Protalk\AdminBundle\Admin\MediaTagAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+      arguments: [null, Protalk\MediaBundle\Entity\MediaTag, null]    
+   protalk.common.admin.category:
+      class: Protalk\AdminBundle\Admin\CategoryAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Category }
+      arguments: [null, Protalk\MediaBundle\Entity\Category, null]
+   protalk.common.admin.tag:
+      class: Protalk\AdminBundle\Admin\TagAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Tag }
+      arguments: [null, Protalk\MediaBundle\Entity\Tag, null]
+   protalk.common.admin.mediatype:
+      class: Protalk\AdminBundle\Admin\MediatypeAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Mediatype }
+      arguments: [null, Protalk\MediaBundle\Entity\Mediatype, null]
+   protalk.common.admin.page:
+      class: Protalk\AdminBundle\Admin\PageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_common, label: Page }
+      arguments: [null, Protalk\PageBundle\Entity\Page, null] 
+   protalk.feed.admin.feed:
+      class: Protalk\AdminBundle\Admin\FeedAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_feed, label: Feed }
+      arguments: [null, Protalk\MediaBundle\Entity\Feed, null] 
+   protalk.feed.admin.feedtype:
+      class: Protalk\AdminBundle\Admin\FeedtypeAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_feed, label: Feedtype }
+      arguments: [null, Protalk\MediaBundle\Entity\Feedtype, null]    
+   protalk.media.admin.media:
+      class: Protalk\AdminBundle\Admin\MediaAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Media }
+      arguments: [null, Protalk\MediaBundle\Entity\Media, ProtalkAdminBundle:MediaAdmin]
+   protalk.media.admin.speaker:
+      class: Protalk\AdminBundle\Admin\SpeakerAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Speaker }
+      arguments: [null, Protalk\MediaBundle\Entity\Speaker, null]
+   protalk.media.admin.comment:
+      class: Protalk\AdminBundle\Admin\CommentAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Comment }
+      arguments: [null, Protalk\MediaBundle\Entity\Comment, null]
+   protalk.media.admin.rating:
+      class: Protalk\AdminBundle\Admin\RatingAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Rating }
+      arguments: [null, Protalk\MediaBundle\Entity\Rating, null]
+   protalk.media.admin.contribution:
+      class: Protalk\AdminBundle\Admin\ContributionAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_media, label: Contribution }
+      arguments: [null, Protalk\MediaBundle\Entity\Contribution, null]   
+   sonata.user.admin:
+      class: Sonata\UserBundle\Admin\Entity\UserAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: protalk_user, label: User }
+      arguments: [null, Sonata\UserBundle\Entity\User, null]  
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Application\Sonata\UserBundle\Entity\User
+
+parameters:
+    home_lists_max:  6
+    search_results_page: 10
+
+ewz_recaptcha:
+    public_key:   6LcAINESAAAAAC1V_QhiarIfD-ikLaLqnmAayo_0
+    private_key:  6LcAINESAAAAAEvnZPMdtyBQ9YwPb3HyS5V90ie2
+    secure:       false
+    locale_key:   kernel.default_locale
+
+fkr_simple_pie:
+    cache_enabled: false
+    cache_dir: %kernel.cache_dir%/rss
+    cache_duration: 3600

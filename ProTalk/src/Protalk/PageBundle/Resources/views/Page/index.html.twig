@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block title page.pagetitle %}
+
+{% block javascriptsHead %}
+{{ parent() }}
+
+<script>
+    var protalk = {
+        baseurl : {{ url('_home')|json_encode|raw }}
+    }
+</script>
+<script src="{{ asset('js/page.js') }}"></script>
+{% endblock %}
+
+{% block bluestrip %}
+    {% include '::bluestripThin.html.twig' %}
+{% endblock %}
+
+{% block body %}
+<h1>{{ page.title }}</h1>
+<div id="pageContent">
+    <p>{{ page.content|raw }}</p>
+</div>
+{% endblock %}
+
+{% block rightcolumn %}
+    {% include '::sidebar.html.twig' %}
+{% endblock %}

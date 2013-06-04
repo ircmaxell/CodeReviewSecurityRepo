@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>ProTalk - {% block title %}Welcome{% endblock %}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        <script src="http://yui.yahooapis.com/3.5.0/build/yui/yui-min.js"></script>
+        {% block javascriptsHead %}{% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssreset/cssreset-min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssbase/cssbase-min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.4.1/build/cssfonts/cssfonts-min.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+        {% block stylesheets %}{% endblock %}
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33630365-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+    </head>
+    <body class="yui3-skin-sam">
+        <a href="https://github.com/protalk/protalk"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+        <div id="panel"></div>
+        <div id="headerContainer" class="contentContainer">
+            <header>
+                <div id="logoContainer">
+                    <a href="{{ path('_home') }}"><img id="logo" src="{{ asset('images/logo_small.png') }}" alt="ProTalk Logo" border="0" /></a>
+                </div>
+                <nav>
+                    <div id="firstNavLink" class="navigation"><a href="{{ path('_home') }}" >HOME</a></div>
+                    <div class="navigation"><a href="{{ path('explore') }}">EXPLORE</a></div>
+                    <div class="navigation"><a href="{{ path('contribute_new') }}">CONTRIBUTE</a></div>
+                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'about' }) }}">ABOUT</a></div>
+                    <div class="navigation"><a href="{{ path('page_show', { 'url': 'contact' }) }}">CONTACT</a></div>
+                </nav>
+            </header>
+        </div>
+
+        {% block bluestrip %}
+            {% include '::bluestrip.html.twig' %}
+        {% endblock %}
+
+        <div id="bodyContainer" class="contentContainer">
+            <div id="leftColumn">
+                <section>
+                    {% block body %}{% endblock %}
+                </section>
+            </div>
+
+            <div id="rightColumn">
+                {% block rightcolumn %}{% endblock %}
+            </div>
+        </div>
+
+        <div class="contentContainer">
+            {% block moreContent %}{% endblock %}
+        </div>
+
+        <div id="footerStrip">
+          <div class="contentContainer">
+
+              <footer>
+                  <div id="followUs">
+                  <p>FOLLOW US</p>
+                  <nav>
+                      <a href="http://protalk.github.com/protalk" target="_blank"><img src="{{ asset('images/githubIcon.png') }}" alt="Github Icon"/></a>
+                      <a href="{{ path('rss') }}" target="_blank"><img src="{{ asset('images/rssIcon.png') }}" alt="RSS Icon"/></a>
+                      <a href="http://twitter.com/pro_talk" target="_blank"><img src="{{ asset('images/twitterIcon.png') }}" alt="Twitter Icon"/></a>
+                      <a href="mailto:info@protalk.me" target="_blank"><img src="{{ asset('images/mailIcon.png') }}" alt="Mail Icon"/></a>
+                  </nav>
+                  </div>
+
+                  <div id="copyright">
+                      <p class="noMarginBottom">Copyright &copy; 2012 ProTalk. All video/audio<br />
+                      content and descriptions are owned by their creators</p>
+                      <p><a target="_blank" class="normalLink" title="hosting & webhosting" href="http://www.combell.com/">Webhosting</a>
+                      and <a target="_blank" class="normalLink" title="domeinnaam registreren" href="http://www.combell.com/nl/domeinnamen/domeinnaam-registratie">domain</a>
+                      by <a target="_blank" class="normalLink" title="Combell Cloud hosting" href="http://www.combell.com/">Combell</a></p>
+                  </div>
+              </footer>
+          </div>
+      </div>
+
+    {% block templateContent %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+    </body>
+</html>

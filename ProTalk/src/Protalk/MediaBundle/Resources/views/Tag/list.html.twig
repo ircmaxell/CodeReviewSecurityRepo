@@ -1,0 +1,3 @@
+{% for tag in tags %}
+  <a class="tagButton" href="{{ path('tag_search', { 'search': tag.slug }) }}"><span>{{ tag.name }}</span></a>
+{% endfor %}
