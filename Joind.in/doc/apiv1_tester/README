@@ -1,0 +1,15 @@
+API V1 Tester
+
+This command line script enables you to test the v1 API.
+
+Help is included wihtin the script, so to see which commands are
+available, just type:
+
+$ php apiv1_test.php
+
+Set these environment variables to control URL and credentials:
+
+    * JIAPIV1_URL
+    * JIAPIV1_USERNAME
+    * JIAPIV1_PASSWORD
+
