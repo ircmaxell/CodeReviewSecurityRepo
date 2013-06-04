@@ -1,0 +1,216 @@
+body {
+   background-color: #fff;
+   margin: 0;
+   font-family: Muli, arial, helvetica, sans-serif;
+   font-size: .8em;
+   line-height: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Buenard', 'Times New Roman', Times, serif;
+   margin: 0;
+}
+
+h1 {
+   font-size: 30px;
+   line-height: 36px;
+}
+
+h2 {
+   font-size: 24px;
+   line-height: 36px;
+}
+
+h3 {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+h6 {
+   font-size: 11px;
+   color: #999;
+   text-transform: uppercase;
+}
+
+.homelink {
+   height: 97px;
+}
+
+.homelink-wrapper {
+   margin: 21px 0 0 30px;
+   width: 217px;
+   padding-bottom: 49px;
+}
+
+.homelink-wrapper, .homelink-wrapper a, .homelink {
+   z-index: 9999;
+}
+
+.header-wrapper {
+   background-image: url(../img/interiorpagebackground_wrapper.jpg);
+   background-repeat: repeat-x;
+}
+
+.header-wrapper .container {
+   padding: 0 25px;
+   margin: auto;
+   background-image: url(../img/interiorpagebackground.jpg);
+   background-repeat: no-repeat;
+}
+
+.page-header {
+   margin-top: 0;
+}
+
+.page-header h1 {
+   font-family: 'Buenard', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.footer-wrapper {
+   background-color: #111;
+   margin-top: 25px;
+   padding: 15px 0 80px;
+   color: #c0c0c0;
+}
+
+.earlybird {
+   color: #fff200;
+}
+
+.marketing .bs-icon {
+   float: left;
+   margin-right: 10px;
+   margin-left: 5;
+   opacity: .8;
+}
+
+.marketing h2 {
+   margin-bottom: 10px;
+}
+
+.navbar {
+   font-size: .8em;
+}
+
+.navbar .nav > li {
+   display: block;
+   float: left;
+   background-color: lightGrey;
+   -webkit-border-bottom-right-radius: 6px;
+   -webkit-border-bottom-left-radius: 6px;
+   -moz-border-radius-bottomright: 6px;
+   -moz-border-radius-bottomleft: 6px;
+   border-bottom-right-radius: 6px;
+   border-bottom-left-radius: 6px;
+/*   margin-left: 2px; -- not sure why but this is causing a problem */
+   -moz-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+   -khtml-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+   -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.55);
+   -o-box-shadow: 0px 0px 4px rgba(0,0,0,0.55);
+}
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+   color: #80F5FF;
+   text-decoration: none;
+   background-color: #0592D5;
+   padding: 11px 10px 9px;
+}
+
+.navbar .nav > li > a {
+   float: none;
+   padding: 7px 10px 9px;
+   line-height: 19px;
+   color: #D23582;
+   text-decoration: none;
+   text-shadow: none;
+   font-weight: bold;
+   font-size: 115%;
+   -webkit-border-bottom-right-radius: 6px;
+   -webkit-border-bottom-left-radius: 6px;
+   -moz-border-radius-bottomright: 6px;
+   -moz-border-radius-bottomleft: 6px;
+   border-bottom-right-radius: 6px;
+   border-bottom-left-radius: 6px;
+}
+
+.navbar .nav > li > a:hover {
+   color: #D23582;
+   text-decoration: none;
+   background-color: transparent;
+   padding: 11px 10px 9px;
+}
+
+.btn-giant {
+   padding: 15px 25px;
+   font-size: 25px;
+   line-height: normal;
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+.centered-text {
+   text-align: center;
+}
+
+.hotels {
+   margin-top: 10px;
+}
+
+.content-wrapper {
+   padding-bottom: 20px;
+}
+
+#buy-tickets {
+   background-color: #ABE876;
+}
+
+#buy-tickets.active a {
+   color: #80F5FF;
+}
+
+#buy-tickets a {
+   color: #7C5134;
+}
+
+.country-flag {
+   vertical-align: -4px;
+   margin-right: 8px;
+}
+
+.forkme-ribbon {
+  background-color: #a00;
+  overflow: hidden;
+  /* top left corner */
+  position: fixed;
+  right: -3.2em;
+  top: 3.5em;
+  /* 45 deg ccw rotation */
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  /* shadow */
+  -moz-box-shadow: 0 0 1em #888;
+  -webkit-box-shadow: 0 0 1em #888;
+}
+
+.forkme-ribbon a {
+  border: 1px solid #faa;
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  font: bold 100% 'Helvetiva Neue', Helvetica, Arial, sans-serif;
+  margin: 0.05em 0 0.075em 0;
+  padding: 0.5em 3.5em;
+  text-align: center;
+  text-decoration: none;
+  /* shadow */
+  text-shadow: 0 0 0.5em #444;
+}
