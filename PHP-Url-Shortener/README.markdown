@@ -1,4 +1,4 @@
-# Overivew #
+# Overview #
 
 This script is simple, but works.  It creates short url's based on your own domain name. The create script is protected by a simple password and will return plain text or JSON.  Included is also a small bit of code for a bookmarklet (see instructions below).
 
